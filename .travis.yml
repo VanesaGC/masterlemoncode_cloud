@@ -7,6 +7,6 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker tag cloud $DOCKER_USER/masterlemoncode_cloud
   - docker push $DOCKER_USER/masterlemoncode_cloud
-  - sleep 20;
+  - sleep 10;
   - eval "$(ssh-agent -s)" && echo $SSH_KEY > my_aws_key.pem && chmod 600 my_aws_key.pem && ssh-add my_aws_key.pem
   - ssh -o StrictHostKeyChecking=no -i "my_aws_key.pem" ec2-user@$HOST "docker kill app && docker rmi mendrugory/masterlemoncode_cloud && docker run --rm -d -p 80:8080 --name app mendrugory/masterlemoncode_cloud"
