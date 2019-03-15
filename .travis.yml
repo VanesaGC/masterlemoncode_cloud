@@ -9,6 +9,7 @@ after_success:
   - docker push $DOCKER_USER/masterlemoncode_cloud
   - sleep 20;
   - echo $SSH_KEY > my_aws_key.pem
+  - chmod 400 my_aws_key.pem
   - ssh -o StrictHostKeyChecking=no -i "my_aws_key.pem" ec2-user@$HOST \
     "docker kill app && docker rmi mendrugory/masterlemoncode_cloud \
     && docker run --rm -d -p 80:8080 --name app mendrugory/masterlemoncode_cloud"
