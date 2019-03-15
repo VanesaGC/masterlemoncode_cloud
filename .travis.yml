@@ -10,6 +10,6 @@ after_success:
   - docker tag cloud $DOCKER_USER/masterlemoncode_cloud
   - docker push $DOCKER_USER/masterlemoncode_cloud
   - sleep 20;
-  - ssh -o StrictHostKeyChecking=no -i "~/.ssh/my_aws_key.pem" ec2-user@$HOST \
+  - ssh -o StrictHostKeyChecking=no -i "~/.ssh/my_aws_key.pem" ec2-user@${HOST} \
     "docker kill app && docker rmi mendrugory/masterlemoncode_cloud \
     && sudo docker run --rm -d -p 80:8080 --name app mendrugory/masterlemoncode_cloud"
